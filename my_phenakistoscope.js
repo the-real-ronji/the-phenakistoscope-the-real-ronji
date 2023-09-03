@@ -80,7 +80,7 @@ function blackhole(x, y, animation, pScope){
   fill(40, 3, 51)
   ellipse(0,0,260,280)
   fill(35, 3, 46)
-  // ellipse(0,0,240,220) 
+  ellipse(0,0,240,220) 
   fill(30, 3, 41)
   ellipse(0,0,180,200)
   fill(25, 3, 36)
