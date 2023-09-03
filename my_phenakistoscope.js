@@ -1,10 +1,10 @@
 const SLICE_COUNT = 12;
 
 function setup_pScope(pScope){
-  pScope.output_mode(ANIMATED_DISK);  //STATIC_FRAME, ANIMATED_FRAME, STATIC_DISK, ANIMATED_DISK
+  pScope.output_mode(ANIMATED_FRAME);  //STATIC_FRAME, ANIMATED_FRAME, STATIC_DISK, ANIMATED_DISK
   pScope.scale_for_screen(true);
   pScope.draw_layer_boundaries(false);
-  pScope.set_direction(CCW);
+  pScope.set_direction(CW);
   pScope.set_slice_count(SLICE_COUNT);
   pScope.load_image("rocket","png")
   pScope.load_image("rocket2","png")
@@ -14,40 +14,52 @@ function setup_layers(pScope){
 
   new PLayer(null, 220);  //lets us draw the whole circle background, ignoring the boundaries
  
+  var backdrop_ = new PLayer(backdrop);
+  backdrop_.mode( RING );
+  backdrop_.set_boundary( 0, 30 );
+  
   var blackhole_ = new PLayer(blackhole);
   blackhole_.mode( RING );
   blackhole_.set_boundary( 0, 30 );
 
   var objects_ = new PLayer(objects);
-  objects_.mode( SWIRL(1) );
-  objects_.set_boundary( 300, 850 );
+  objects_.mode( SWIRL(2) );
+  objects_.set_boundary( 0, 1200 );
 
   var rockets_ = new PLayer(rockets);
   rockets_.mode( RING );
   rockets_.set_boundary( 850, 1000 );
-
-  // var layer4 = new Player(debris);
-  // layer4.mode( RING );
-  // layer4.set_boundary( 10, 850 );
 }
 
 function objects(x, y, animation, pScope){
 
   // translate(0,0);  //moves icon to a certain position
   // scale(animation.wave(3)*4); //determines size of icon
-
   // push()
   // translate(animation.wave(30),0)
   // scale(.08)
   // rotate(-46)
   // pScope.draw_image("rocket2",0,1) 
   // pop()
- 
+
+  push()
+  noStroke()
+  scale(0+animation.frame*2) 
+  fill(80)
+  ellipse(-50+animation.wave()*300,0,50,50)
+  pop()
+
+  translate(0+animation.wave(1)*-80,0)  //wave(3) rocket latches on
+  push()
+  rotate(-45)
+  scale(0+animation.frame*.09)
+  pScope.draw_image("rocket2",0,0)
+  pop()
 }
 
 function rockets(x, y, animation, pScope){
   
-  translate(0,-930)
+  translate(100,-930)
   scale(.6)
   rotate(-62)
   
@@ -56,25 +68,38 @@ function rockets(x, y, animation, pScope){
   pop()
 }
 
-function blackhole(x, y, animation, pScope){
+function backdrop(x, y, animation, pScope){
 
-    // this is how you set up a background for a specific layer
-  let angleOffset = (360 / SLICE_COUNT) / 1.9
+   let angleOffset = (360 / SLICE_COUNT) / 1.9
   let backgroundArcStart = 270 - angleOffset;
   let backgroundArcEnd = 270 + angleOffset;
 
   noStroke()
 
   fill(17, 0, 36)
-  arc(x,y,2000,2000,backgroundArcStart,backgroundArcEnd); // draws "pizza slice" in the background
+  arc(x,y,2000,2000,backgroundArcStart,backgroundArcEnd); 
 
   fill(20,0,39)
-  arc(x,y,1400,1400,backgroundArcStart,backgroundArcEnd); // draws "pizza slice" in the background
+  arc(x,y,1400,1400,backgroundArcStart,backgroundArcEnd); 
 
   fill(23,0,42)
-  arc(x,y,900,900,backgroundArcStart,backgroundArcEnd); // draws "pizza slice" in the background
+  arc(x,y,900,900,backgroundArcStart,backgroundArcEnd); 
 
+  push()
+  fill(40, 3, 46, 200-animation.wave(2)*100) //animation.wave()*200
+  ellipse(30-animation.wave(.5)*80,-300-animation.wave(.5)*80,100,100)
+  ellipse(-30+animation.wave(.5)*100,-500-animation.wave(.5)*100,120,120)
+  ellipse(0-animation.wave(.5)*120,-700-animation.wave(.5)*120,140,140)
 
+  pop()
+}
+
+function blackhole(x, y, animation, pScope){
+
+  noStroke()
+  // fill(40, 3, 46, 200-animation.wave(2)*100) //animation.wave()*200
+  // ellipse(0-animation.wave(.5)*120,-700-animation.wave(.5)*120,140,140)
+  
   fill(60, 3, 71)
   ellipse(0,0,400+animation.wave(.1)*50,420+animation.wave(.1)*50)
   fill(55, 3, 66)
@@ -97,13 +122,4 @@ function blackhole(x, y, animation, pScope){
   ellipse(0,0,80,60)
   fill(10,3,21)
   ellipse(0,0,40,40)
-
-  push()
-  fill(40, 3, 46, 200-animation.wave(2)*100) //animation.wave()*200
-  ellipse(30-animation.wave(.5)*80,-300-animation.wave(.5)*80,100,100)
-  ellipse(-30+animation.wave(.5)*100,-500-animation.wave(.5)*100,120,120)
-  ellipse(0-animation.wave(.5)*120,-700-animation.wave(.5)*120,140,140)
-  pop()
-
 }
-
