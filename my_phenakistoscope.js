@@ -18,9 +18,9 @@ function setup_layers(pScope){
   blackhole_.mode( RING );
   blackhole_.set_boundary( 0, 30 );
 
-  // var objects_ = new PLayer(objects);
-  // objects_.mode( SWIRL(1) );
-  // objects_.set_boundary( 300, 850 );
+  var objects_ = new PLayer(objects);
+  objects_.mode( SWIRL(1) );
+  objects_.set_boundary( 300, 850 );
 
   var rockets_ = new PLayer(rockets);
   rockets_.mode( RING );
@@ -36,12 +36,12 @@ function objects(x, y, animation, pScope){
   // translate(0,0);  //moves icon to a certain position
   // scale(animation.wave(3)*4); //determines size of icon
 
-  push()
-  translate(animation.wave(30),0)
-  scale(.08)
-  rotate(-46)
-  pScope.draw_image("rocket2",0,1) 
-  pop()
+  // push()
+  // translate(animation.wave(30),0)
+  // scale(.08)
+  // rotate(-46)
+  // pScope.draw_image("rocket2",0,1) 
+  // pop()
  
 }
 
@@ -63,11 +63,17 @@ function blackhole(x, y, animation, pScope){
   let backgroundArcStart = 270 - angleOffset;
   let backgroundArcEnd = 270 + angleOffset;
 
-  
+  noStroke()
+
   fill(17, 0, 36)
   arc(x,y,2000,2000,backgroundArcStart,backgroundArcEnd); // draws "pizza slice" in the background
 
-  noStroke()
+  fill(20,0,39)
+  arc(x,y,1400,1400,backgroundArcStart,backgroundArcEnd); // draws "pizza slice" in the background
+
+  fill(23,0,42)
+  arc(x,y,900,900,backgroundArcStart,backgroundArcEnd); // draws "pizza slice" in the background
+
 
   fill(60, 3, 71)
   ellipse(0,0,400+animation.wave(.1)*50,420+animation.wave(.1)*50)
@@ -93,11 +99,10 @@ function blackhole(x, y, animation, pScope){
   ellipse(0,0,40,40)
 
   push()
-  fill(35, 3, 46, 200-animation.frame*100) //animation.wave()*200
+  fill(40, 3, 46, 200-animation.wave(2)*100) //animation.wave()*200
   ellipse(30-animation.wave(.5)*80,-300-animation.wave(.5)*80,100,100)
   ellipse(-30+animation.wave(.5)*100,-500-animation.wave(.5)*100,120,120)
   ellipse(0-animation.wave(.5)*120,-700-animation.wave(.5)*120,140,140)
-
   pop()
 
 }
