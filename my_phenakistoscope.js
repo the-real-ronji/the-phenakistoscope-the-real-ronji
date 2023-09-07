@@ -1,7 +1,7 @@
 const SLICE_COUNT = 12;
 
 function setup_pScope(pScope){
-  pScope.output_mode(ANIMATED_FRAME);  //STATIC_FRAME, ANIMATED_FRAME, STATIC_DISK, ANIMATED_DISK
+  pScope.output_mode(ANIMATED_DISK);  //STATIC_FRAME, ANIMATED_FRAME, STATIC_DISK, ANIMATED_DISK
   pScope.scale_for_screen(true);
   pScope.draw_layer_boundaries(false);
   pScope.set_direction(CW);
@@ -33,15 +33,6 @@ function setup_layers(pScope){
 
 function objects(x, y, animation, pScope){
 
-  // translate(0,0);  //moves icon to a certain position
-  // scale(animation.wave(3)*4); //determines size of icon
-  // push()
-  // translate(animation.wave(30),0)
-  // scale(.08)
-  // rotate(-46)
-  // pScope.draw_image("rocket2",0,1) 
-  // pop()
-
   push()
   noStroke()
   scale(0+animation.frame*2) 
@@ -49,12 +40,12 @@ function objects(x, y, animation, pScope){
   ellipse(-50+animation.wave()*300,0,50,50)
   pop()
 
-  translate(0+animation.wave(1)*-80,0)  //wave(3) rocket latches on
-  push()
-  rotate(-45)
-  scale(0+animation.frame*.09)
-  pScope.draw_image("rocket2",0,0)
-  pop()
+  // translate(0+animation.wave(1)*-80,0)  //wave(3) rocket latches on
+  // push()
+  // rotate(-230)
+  // scale(0+animation.frame*.09)
+  // pScope.draw_image("rocket2",0,0)
+  // pop()
 }
 
 function rockets(x, y, animation, pScope){
@@ -70,7 +61,7 @@ function rockets(x, y, animation, pScope){
 
 function backdrop(x, y, animation, pScope){
 
-   let angleOffset = (360 / SLICE_COUNT) / 1.9
+  let angleOffset = (360 / SLICE_COUNT) / 1.9
   let backgroundArcStart = 270 - angleOffset;
   let backgroundArcEnd = 270 + angleOffset;
 
