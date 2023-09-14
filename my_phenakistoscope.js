@@ -8,7 +8,7 @@ function setup_pScope(pScope){
   pScope.set_slice_count(SLICE_COUNT);
   pScope.load_image("rocket3","png")
   pScope.load_image("meteor3","png")
-  pScope.load_image("meteor","png")
+  
 }
 
 function setup_layers(pScope){
